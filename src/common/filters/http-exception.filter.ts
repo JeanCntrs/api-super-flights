@@ -17,7 +17,6 @@ export class AllExceptionFilter implements ExceptionFilter {
             time: new Date().toISOString(),
             path: request.url,
             error: msg
-            
         });
     }
 }
