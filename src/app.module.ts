@@ -12,8 +12,8 @@ import { UserModule } from './user/user.module';
       isGlobal: true
     }),
     MongooseModule.forRoot(process.env.URL_MONGODB, {
-      useCreateIndex: true,
-      useFindAndModify: false
+      // useCreateIndex: true,
+      // useFindAndModify: false
     }),
     UserModule
   ],
