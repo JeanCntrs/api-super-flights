@@ -16,6 +16,10 @@ export class PassengerService {
     }
 
     async findAll(): Promise<IPassenger[]> {
-        return await this.model.find()
+        return await this.model.find();
+    }
+
+    async findOne(id: string): Promise<IPassenger> {
+        return await this.model.findById(id);
     }
 }
