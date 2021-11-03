@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { IPassenger } from 'src/common/interfaces/passenger.interface';
@@ -25,5 +25,11 @@ export class PassengerService {
 
     async update(id: string, passengerDTO: PassengerDTO): Promise<IPassenger> {
         return await this.model.findByIdAndUpdate(id, passengerDTO, { new: true });
+    }
+
+    async delete(id: string) {
+        await this.model.findByIdAndDelete(id);
+
+        return { status: HttpStatus.OK, message: 'deleted' };
     }
 }
