@@ -1,6 +1,9 @@
+import { IPassenger } from "./passenger.interface";
+
 export interface IFlight extends Document {
-    readonly pilot: string;
-    readonly airplane: string;
-    readonly destinationCity: string;
-    readonly flightDate: Date;
+    pilot: string;
+    airplane: string;
+    destinationCity: string;
+    flightDate: Date;
+    passengers: IPassenger[];
 }
