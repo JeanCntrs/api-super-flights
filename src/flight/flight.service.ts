@@ -22,4 +22,8 @@ export class FlightService {
     async findOne(id: string): Promise<IFlight> {
         return await this.model.findById(id);
     }
+
+    async update(id: string, flightDTO: FlightDTO): Promise<IFlight> {
+        return await this.model.findByIdAndUpdate(id, flightDTO, { new: true });
+    }
 }
