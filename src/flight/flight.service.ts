@@ -14,4 +14,8 @@ export class FlightService {
 
         return await newFlight.save();
     }
+
+    async findAll(): Promise<IFlight[]> {
+        return await this.model.find();
+    }
 }
