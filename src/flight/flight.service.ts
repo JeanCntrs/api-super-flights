@@ -18,4 +18,8 @@ export class FlightService {
     async findAll(): Promise<IFlight[]> {
         return await this.model.find();
     }
+
+    async findOne(id: string): Promise<IFlight> {
+        return await this.model.findById(id);
+    }
 }
