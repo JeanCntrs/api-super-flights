@@ -10,11 +10,11 @@ export class FlightService {
     constructor(@InjectModel(FLIGHT.name) private readonly model: Model<IFlight>) { }
 
     async findAll(): Promise<IFlight[]> {
-        return await this.model.find();
+        return await this.model.find().populate('passengers');
     }
 
     async findOne(id: string): Promise<IFlight> {
-        return await this.model.findById(id);
+        return await this.model.findById(id).populate('passengers');
     }
 
     async create(flightDTO: FlightDTO): Promise<IFlight> {
