@@ -4,7 +4,9 @@ import { Model } from 'mongoose';
 import { IFlight } from 'src/common/interfaces/flight.interface';
 import { FLIGHT } from 'src/common/models/models';
 import { FlightDTO } from './dto/flight.dto';
-
+import * as moment from 'moment'
+import axios from 'axios';
+import { ILocation } from 'src/common/interfaces/location.interface';
 @Injectable()
 export class FlightService {
     constructor(@InjectModel(FLIGHT.name) private readonly model: Model<IFlight>) { }
@@ -14,7 +16,10 @@ export class FlightService {
     }
 
     async findOne(id: string): Promise<IFlight> {
-        return await this.model.findById(id).populate('passengers');
+        const flight = await this.model.findById(id).populate('passengers');
+        const location: ILocation = await this.getLocation(flight.destinationCity);
+
+        return flight;
     }
 
     async create(flightDTO: FlightDTO): Promise<IFlight> {
@@ -39,5 +44,11 @@ export class FlightService {
         await this.model.findByIdAndDelete(id);
 
         return { status: HttpStatus.OK, message: 'deleted' }
+    }
+
+    async getLocation(destinationCity: string): Promise<ILocation> {
+        const { data } = await axios.get(`https://www.metaweather.com/api/location/search/?query=${destinationCity}`);
+
+        return data[0];
     }
 }
